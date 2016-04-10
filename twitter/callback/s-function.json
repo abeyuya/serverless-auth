@@ -1,10 +1,10 @@
 {
-  "name": "auth",
+  "name": "callback",
   "runtime": "nodejs4.3",
   "description": "Serverless Lambda function for project: serverless-auth",
   "customName": false,
   "customRole": false,
-  "handler": "auth/handler.handler",
+  "handler": "callback/handler.handler",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
@@ -13,7 +13,7 @@
   },
   "endpoints": [
     {
-      "path": "twitter/auth",
+      "path": "twitter/callback",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
@@ -22,9 +22,9 @@
       "requestParameters": {},
       "requestTemplates": {
         "application/json": {
-          "app_id": "$input.params('app_id')",
-          "host": "$input.params().header.get('Host')",
-          "stage": "$context.stage"
+          "oauth_token": "$input.params('oauth_token')",
+          "oauth_verifier": "$input.params('oauth_verifier')",
+          "cookie": "$input.params().header.get('Cookie')"
         }
       },
       "responses": {
@@ -34,8 +34,7 @@
         "default": {
           "statusCode": "301",
           "responseParameters": {
-            "method.response.header.Location": "integration.response.body.redirectUrl",
-            "method.response.header.Set-Cookie": "integration.response.body.setCookie"
+            "method.response.header.Location": "integration.response.body.redirectUrl"
           },
           "responseModels": {},
           "responseTemplates": {

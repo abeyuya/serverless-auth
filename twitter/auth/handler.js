@@ -2,15 +2,16 @@
 
 var Apps = require('../apps.js');
 var OAuth = require('oauth');
-var Qs = require('qs');
+var qs = require('qs');
 
 module.exports.handler = function(event, context) {
+  
   if (!event.app_id) return context.done('no app_id');
+  if (!event.host)   return context.done('no host');
+  if (!event.stage)  return context.done('no stage');
   
   var callbackUrl = [
-    'https://uwr7sy1qf2.execute-api.ap-northeast-1.amazonaws.com/',
-    event.stage,
-    '/twitter/callback'
+    'https://', event.host, '/', event.stage, '/twitter/callback'
   ].join('');
   
   var oauth = new OAuth.OAuth(
@@ -28,7 +29,7 @@ module.exports.handler = function(event, context) {
     
     return context.done(null, {
       redirectUrl: 'https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token,
-      setCookie: Qs.stringify({ // NOTE: Api Gateway dose not support multiple Set-Cookie
+      setCookie: qs.stringify({ // NOTE: Api Gateway does not support multiple Set-Cookie
         app_id: event.app_id,
         oauth_token_secret: oauth_token_secret
       })
