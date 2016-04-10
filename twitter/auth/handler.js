@@ -3,12 +3,13 @@
 var Apps = require('../apps.js');
 var OAuth = require('oauth');
 var qs = require('qs');
+var ErrorResponse = require('../lib/error_response.js');
 
 module.exports.handler = function(event, context) {
   
-  if (!event.app_id) return context.done('no app_id');
-  if (!event.host)   return context.done('no host');
-  if (!event.stage)  return context.done('no stage');
+  if (!event.app_id) return ErrorResponse.back(Apps[event.app_id].callbackUrl, context, 'no app_id');
+  if (!event.host)   return ErrorResponse.back(Apps[event.app_id].callbackUrl, context, 'no host');
+  if (!event.stage)  return ErrorResponse.back(Apps[event.app_id].callbackUrl, context, 'no stage');
   
   var callbackUrl = [
     'https://', event.host, '/', event.stage, '/twitter/callback'
@@ -25,7 +26,7 @@ module.exports.handler = function(event, context) {
   );
   
   oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
-    if (error) context.done(JSON.stringify(error));
+    if (error) return ErrorResponse.back(Apps[event.app_id].callbackUrl, context, JSON.stringify(error));
     
     return context.done(null, {
       redirectUrl: 'https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token,
