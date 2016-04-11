@@ -1,0 +1,9 @@
+'use strict';
+
+module.exports = {
+  1: { // get keys from https://apps.twitter.com
+    'consumerKey': 'xxxxxxxxxxxxxxxxxxxxxxxxx',
+    'consumerSecret': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    'callbackUrl': 'http://abeyuya.github.io/serverless-auth/'
+  }
+}
