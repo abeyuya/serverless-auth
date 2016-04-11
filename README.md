@@ -6,9 +6,6 @@ This is sample project for twitter authentication by [serverless](https://github
 
 http://abeyuya.github.io/serverless-auth/
 
-# Development
+# Related project
 
-```
-$ node -v
-4.2.4
-```
+* https://github.com/laardee/serverless-authentication-boilerplate
