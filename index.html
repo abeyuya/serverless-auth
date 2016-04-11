@@ -57,7 +57,7 @@
         '<h3 class="panel-title">Authentication failure...</h3>',
         '</div>',
         '<div class="panel-body">',
-        arg.message,
+        decodeURI(arg.message),
         '</div>',
         '</div>'
       ].join('');
