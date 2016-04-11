@@ -6,11 +6,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>serverless-auth</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.css">
+  <style>
+    #callback-info {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Hello serverless-auth</h1>
-    <a href="https://uwr7sy1qf2.execute-api.ap-northeast-1.amazonaws.com/dev/twitter/auth?app_id=1">Twitter Auth</a>
+    <div class="page-header">
+      <h2>
+        This is example of <span class="mega-octicon octicon-mark-github"></span>
+        <a href="https://github.com/abeyuya/serverless-auth"> serverless-auth</a>
+      </h2>
+    </div>
+    <a href="https://uwr7sy1qf2.execute-api.ap-northeast-1.amazonaws.com/dev/twitter/auth?app_id=1">
+      <button type="button" class="btn btn-info btn-lg">Twitter Auth</button>
+    </a>
+    
+    <div id="callback-info"></div>
   </div>
+  
+  <script>
+  
+  var arg = new Object;
+  var pair=location.search.substring(1).split('&');
+  for(var i=0;pair[i];i++) {
+    var kv = pair[i].split('=');
+    arg[kv[0]]=kv[1];
+  }
+  
+  if (Object.keys(arg).length !== 0) {
+    if (arg.twitter_auth == 1) {
+      document.getElementById("callback-info").innerHTML = [
+        '<div class="panel panel-success">',
+        '<div class="panel-heading">',
+        '<h3 class="panel-title">Authentication success!</h3>',
+        '</div>',
+        '<div class="panel-body">',
+        'access_token: ', arg.access_token, '<br />',
+        'access_token_secret: ', arg.access_token_secret,
+        '</div>',
+        '</div>'
+      ].join('');
+    } else {
+      document.getElementById("callback-info").innerHTML = [
+        '<div class="panel panel-danger">',
+        '<div class="panel-heading">',
+        '<h3 class="panel-title">Authentication failure...</h3>',
+        '</div>',
+        '<div class="panel-body">',
+        arg.message,
+        '</div>',
+        '</div>'
+      ].join('');
+    }
+  }
+
+  </script>
 </body>
 </html>
