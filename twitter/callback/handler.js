@@ -37,8 +37,8 @@ module.exports.handler = function(event, context) {
         '?',
         qs.stringify({
           twitter_auth: 1,
-          access_token: access_token.substr(0, 4) + '...',
-          access_token_secret: access_token_secret.substr(0, 4) + '...'
+          access_token: access_token,
+          access_token_secret: access_token_secret
         })
       ].join('')
       
