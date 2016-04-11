@@ -9,5 +9,11 @@
     "type": "git",
     "url": "git://github.com/"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "gh-pages": "^0.11.0"
+  },
+  "scripts": {
+    "gh-pages": "node gh-pages/gh-pages.js"
+  }
 }

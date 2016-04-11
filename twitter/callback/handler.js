@@ -32,8 +32,18 @@ module.exports.handler = function(event, context) {
       
       // save access_token, access_token_secret, or do something
       
+      var redirectUrl = [
+        Apps[cookie.app_id].callbackUrl,
+        '?',
+        qs.stringify({
+          twitter_auth: 1,
+          access_token: access_token.substr(0, 4) + '...',
+          access_token_secret: access_token_secret.substr(0, 4) + '...'
+        })
+      ].join('')
+      
       return context.done(null, {
-        redirectUrl: Apps[cookie.app_id].callbackUrl + '?twitter_auth=1'
+        redirectUrl: redirectUrl
       });
     }
   );
