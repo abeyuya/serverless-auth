@@ -2,7 +2,6 @@
 
 var Apps = require('../apps.js');
 var OAuth = require('oauth');
-var qs = require('qs');
 var ErrorResponse = require('../lib/error_response.js');
 
 module.exports.handler = function(event, context) {
@@ -30,7 +29,7 @@ module.exports.handler = function(event, context) {
     
     return context.done(null, {
       redirectUrl: 'https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token,
-      setCookie: qs.stringify({ // NOTE: Api Gateway does not support multiple Set-Cookie
+      setCookie: 'auth_value=' + JSON.stringify({ // NOTE: Api Gateway does not support multiple Set-Cookie
         app_id: event.app_id,
         oauth_token_secret: oauth_token_secret
       })

@@ -1,4 +1,5 @@
 {
   "app_id": 1,
-  "stage": "local"
+  "stage": "local",
+  "host": "localhost"
 }

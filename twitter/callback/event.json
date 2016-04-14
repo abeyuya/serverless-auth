@@ -1,1 +1,5 @@
-{}
+{
+  "cookie": "auth_value={\"app_id\":1,\"oauth_token_secret\":\"Xld1wUxR19xwWLyDwXp4B1CrI90ykIWP\"}",
+  "oauth_token": "xxxxxxxxxxxxxx",
+  "oauth_verifier": "xxxxxxxxxxxxxx"
+}

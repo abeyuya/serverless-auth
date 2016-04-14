@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie": "^0.2.3",
     "oauth": "^0.9.14",
     "qs": "^6.1.0"
   }
