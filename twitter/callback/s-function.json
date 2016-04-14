@@ -32,7 +32,7 @@
           "statusCode": "400"
         },
         "default": {
-          "statusCode": "301",
+          "statusCode": "302",
           "responseParameters": {
             "method.response.header.Location": "integration.response.body.redirectUrl"
           },

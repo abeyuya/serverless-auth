@@ -10,17 +10,13 @@ module.exports.handler = function(event, context) {
   if (!event.host)   return ErrorResponse.back(Apps[event.app_id].callbackUrl, context, 'no host');
   if (!event.stage)  return ErrorResponse.back(Apps[event.app_id].callbackUrl, context, 'no stage');
   
-  var callbackUrl = [
-    'https://', event.host, '/', event.stage, '/twitter/callback'
-  ].join('');
-  
   var oauth = new OAuth.OAuth(
     'https://api.twitter.com/oauth/request_token',
     'https://api.twitter.com/oauth/access_token',
     Apps[event.app_id].consumerKey,
     Apps[event.app_id].consumerSecret,
     '1.0A',
-    callbackUrl,
+    'https://' + event.host + '/' + event.stage + '/twitter/callback',
     'HMAC-SHA1'
   );
   
